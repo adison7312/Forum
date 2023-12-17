@@ -1,0 +1,64 @@
+﻿@model IEnumerable<WebApplication17.Models.Category>
+
+@{
+    ViewBag.Title = "Strona główna";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div>
+    <div class="carousel-inner">
+        <div class="item active">
+
+            <div class="header-text hidden-xs">
+                <div class="col-md-12 text-center">
+                    <h2>
+                        <span>@ViewBag.News[0].Title</span>
+                    </h2>
+                    <br>
+                    <h3>
+                        <span>@ViewBag.News[0].Text</span>
+                    </h3>
+                    <br /><br />
+                </div>
+            </div>
+        </div>
+       
+    </div>
+</div>
+
+
+<div class="panel-group title-bar-position" id="accordion">
+
+    @foreach (var item in Model)
+    {
+        <div class="panel panel-default">
+            <div class="panel-heading title-bar">
+
+
+                <table>
+                    <tr>
+                        <td class="col-xs-10">
+                            <b>@item.Title</b><br />
+                            @item.Text
+                        </td>
+                        <td class="col-xs-2">
+                            Ostatni post
+                        </td>
+
+                    </tr>
+                </table>
+            </div>
+
+            <div class="panel-body" style="padding-bottom: 0px; padding-top: 0px;">
+
+                @Html.Action("Subjects_partial", "Categories", new { id = item.Id })
+
+            </div>
+
+        </div>
+    }
+</div>
+<br />
+<h4>Statystyki</h4>
+<hr />
+Liczba postów: <b>@ViewBag.PostCount</b> • Liczba wątków: <b>@ViewBag.ThreadCount</b> • Liczba użytkowników: <b>@ViewBag.UserCount</b> • Najnowszy użytkownik: <b></b>@ViewBag.NewestUser

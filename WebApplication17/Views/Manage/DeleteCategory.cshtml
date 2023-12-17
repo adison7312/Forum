@@ -1,0 +1,48 @@
+﻿@model WebApplication17.Models.Category
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h3>Czy na pewno chcesz usunąć kategorię o nazwie @Model.Title?</h3>
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            Tytuł:
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Title)
+        </dd>
+
+        <dt>
+            Opis:
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Text)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="form-actions no-color">
+                @Ajax.ActionLink("Usuń kategorię", "DeleteCategoryConfirmed", null, new { id = Model.Id },
+                                        new AjaxOptions
+                                        {
+                                            HttpMethod = "POST",
+                                            UpdateTargetId = "moj_div",
+                                            InsertionMode = InsertionMode.Replace
+
+                                        }, new { @class = "btn btn-danger btn-md" })
+
+                @Ajax.ActionLink("Powrót do listy", "ManageForum", null, new AjaxOptions { UpdateTargetId = "moj_div", InsertionMode = InsertionMode.Replace, HttpMethod = "GET" }, new { @class = "btn btn-primary btn-md" })
+
+            </div>
+        }
+
+</div>

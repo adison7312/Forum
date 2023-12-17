@@ -1,0 +1,29 @@
+﻿@model IEnumerable<WebApplication17.Models.News>
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@if (User.IsInRole("Admin") && Request.IsAuthenticated)
+{
+    <br />
+    @Ajax.ActionLink("Stwórz nowego newsa", "CreateNews", null, new AjaxOptions { UpdateTargetId = "moj_div", InsertionMode = InsertionMode.Replace, HttpMethod = "GET" }, new { @class = "btn btn-success btn-md" })
+    <br /><br /><br />
+    <table class="table table-bordered">
+        <th class="col-md-5">Tytuł</th>
+        <th class="col-md-2">Akcja</th>
+        @foreach (var news in Model)
+        {
+            <tr>
+                <td>
+                    @news.Title
+                </td>
+                <td>
+                    @Ajax.ActionLink("Edytuj", "EditNews", new { id = news.Id }, new AjaxOptions { UpdateTargetId = "moj_div", InsertionMode = InsertionMode.Replace, HttpMethod = "GET" }, new { @class = "btn btn-info btn-sm" })
+                    @Ajax.ActionLink("Usuń", "DeleteNews", new { id = news.Id }, new AjaxOptions { UpdateTargetId = "moj_div", InsertionMode = InsertionMode.Replace, HttpMethod = "GET" }, new { @class = "btn btn-danger btn-sm" })
+                </td>
+
+            </tr>
+        }
+    </table>
+}

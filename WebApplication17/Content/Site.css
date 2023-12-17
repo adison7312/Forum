@@ -1,0 +1,168 @@
+﻿body {
+    padding-bottom: 20px;
+    margin: auto;
+}
+
+/* Set padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+/* Override the default bootstrap behavior where horizontal description lists 
+   will truncate terms that are too long to fit in the left column 
+*/
+.dl-horizontal dt {
+    white-space: normal;
+}
+
+/* Set width on the form input elements since they're 100% wide by default */
+input,
+select,
+textarea {
+    max-width: 280px;
+}
+
+/*---------------------------------------------------------------------------------------*/
+/*
+    <css - Categories>
+*/
+.title-bar-position {
+    padding-top: 20px;
+}
+
+.title-bar-stats {
+    color: #c7c7c7;
+    font-size: 15px;
+    width: 20%;
+    float: right;
+    text-align: center;
+    border-color: white;
+    border-left: solid;
+}
+
+.title-bar {
+    background-color: #222222 !important;
+    min-height: 20px;
+}
+
+    .title-bar table {
+        color: #c7c7c7;
+        font-size: 15px;
+        margin-top: inherit;
+        margin-bottom: inherit;
+        width: 100%;
+    }
+
+    .title-bar a:hover {
+        text-decoration: none;
+    }
+
+    .title-bar a {
+        color: inherit;
+    }
+
+/*
+    </css - Categories>
+*/
+/*---------------------------------------------------------------------------------------*/
+/*
+    <css-Subjects>
+*/
+.subject-content {
+    padding: 10px;
+    align-content: center;
+    border-bottom: 1px solid#000000;
+
+}
+
+
+/*
+    </css-Subjects>
+*/
+/*---------------------------------------------------------------------------------------*/
+/*
+    <bootstrap override>
+*/
+.navbar {
+    position: relative;
+    z-index: 1000;
+    min-height: 60px;
+    margin-bottom: 0px;
+    border: 1px solid transparent;
+    font-size: 15px;
+}
+
+/*
+    </bootstrap override>
+*/
+.carousel-indicators .active {
+    background-color: #2980b9;
+}
+
+.carousel-inner img {
+    width: 100%;
+    max-height: 460px
+}
+
+.carousel-control {
+    width: 0;
+}
+
+.carousel-control.left,
+.carousel-control.right {
+	background-image: none;
+	text-shadow: none;
+}
+
+.carousel-control.left span {
+	padding: 15px;
+}
+
+.carousel-control.right span {
+	padding: 15px;
+}
+
+.carousel-control .glyphicon-chevron-left, 
+.carousel-control .glyphicon-chevron-right, 
+.carousel-control .icon-prev, 
+.carousel-control .icon-next {
+	position: absolute;
+	top: 45%;
+	z-index: 5;
+	display: inline-block;
+}
+
+.carousel-control .glyphicon-chevron-left,
+.carousel-control .icon-prev {
+	left: 0;
+}
+
+.carousel-control .glyphicon-chevron-right,
+.carousel-control .icon-next {
+	right: 0;
+}
+
+
+.carousel-control.left span:hover,
+.carousel-control.right span:hover {
+	opacity: .7;
+}
+
+pre {
+    padding-left: 0px;
+    background-color: transparent;
+    color: white;
+    border: none;
+    font-family: "Arial", Times, serif;
+}
+
+.avatar {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 100px;
+    height: 100px;
+}
+
+/* Carousel Header Styles */

@@ -1,0 +1,23 @@
+﻿@model WebApplication17.Models.ApplicationUser
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h4>Zmień awatar</h4>
+<hr />
+
+<img src="@ViewBag.Avatar" />
+
+@using (Html.BeginForm("FileUpload",
+    "Manage",
+    FormMethod.Post,
+    new { enctype = "multipart/form-data", id = "imageform" }))
+{
+    <br />
+    <label for="openFile">Wgraj nowy awatar:</label>
+    <input type="file" name="file" id="openFile" accept="image/*" />
+    <br />
+    <input type="submit" value="Prześlij" id="submit" class="btn btn-info" />
+    <h4 id="error" style="color: red"></h4>
+}

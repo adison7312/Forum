@@ -1,0 +1,7 @@
+﻿@model WebApplication17.Models.Post
+
+<div>
+    <a href="@Url.Action("PostThread", "Posts", new {id = Model.ThreadId})#@Model.Id">@Model.Thread.Title</a>
+</div>
+<div style="font-size: 13px">autor: @Model.User.UserName</div>
+<div style="font-size: 12px"> @($"{Model.Date:dd/MM/yyyy, hh:mm}") </div>

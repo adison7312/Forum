@@ -1,0 +1,25 @@
+﻿@model WebApplication17.Models.Friends
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Usuanie</h2>
+
+<h3>Napewno chcesz usunąć znajomego? </h3>
+<h4> @Model.Friend.UserName</h4>
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+    </dl>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" />
+            @Ajax.ActionLink("Powrót do listy", "Inbox", "Manage", null, new AjaxOptions { UpdateTargetId = "moj_div", InsertionMode = InsertionMode.Replace, HttpMethod = "GET" }, new { @class = "btn btn-primary btn-md" })
+        </div>
+    }
+</div>

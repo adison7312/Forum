@@ -1,0 +1,21 @@
+﻿@model WebApplication17.Models.ApplicationUser
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h4>@Model.UserName</h4>
+<br />
+<div>
+    <div class="row">
+        Rank: @Model.Rank
+    </div>
+    <div class="row">
+        Zarejestrowany dnia: @Model.RegistrationDate
+    </div>
+    <br />
+
+    @Html.ActionLink("Dodaj znajomego", "AddFriend", "Friends", new { id = Model.Id }, new { @class = "btn btn-primary btn-md" })
+
+    @Ajax.ActionLink("Powrót do listy", "FriendsAdd", "Manage", null, new AjaxOptions { UpdateTargetId = "moj_div", InsertionMode = InsertionMode.Replace, HttpMethod = "GET" }, new { @class = "btn btn-primary btn-md" })
+</div>

@@ -1,0 +1,21 @@
+﻿@model IEnumerable<WebApplication17.Models.Message>
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row">
+    <br />
+    <div class="col-xs-9 p-3" id="messages_">
+        @Html.Action("PMessage")
+
+    </div>
+    <div class="col-xs-3">
+        @Ajax.ActionLink("Nowa wiadomosc", "Create", "Messages", null, new AjaxOptions { UpdateTargetId = "moj_div", InsertionMode = InsertionMode.Replace, HttpMethod = "GET" }, new { @class = "list-group-item list-group-item-text" })
+        @Ajax.ActionLink("Dodaj znajomego", "FriendsAdd", null, new AjaxOptions { UpdateTargetId = "moj_div", InsertionMode = InsertionMode.Replace, HttpMethod = "GET" }, new { @class = "list-group-item list-group-item-text" })
+        <br />
+        Znajomi:
+        @Html.Action("PFriends")
+    </div>
+
+</div>

@@ -1,0 +1,52 @@
+﻿@model IEnumerable<WebApplication17.Models.Message>
+
+
+<div class="panel-group" id="accordion">
+    <div class="panel panel-default">
+        <div class="panel-heading title-bar">
+            <table>
+                <tr>
+                    <td>
+                        Wiadomości
+                    </td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="panel-body" style="padding:0px;">
+
+            <div>
+
+                <table width="100%">
+                    @foreach (var item in Model)
+                    {
+                        <tr id="detailsMessage" class="subject-content" onclick="markAsRead(@item.Id)">
+                            @if (item.IsRead == false)
+                            {
+                                <td class="col-xs-9" )>
+                                    @Ajax.ActionLink(@item.Title, "Details", "Messages", new { id = @item.Id }, new AjaxOptions { UpdateTargetId = "moj_div", InsertionMode = InsertionMode.Replace, HttpMethod = "GET" }, new { @class = "" })
+                                </td>
+                                <td class="col-xs-1" )>
+                                    Czytaj
+                                </td>
+
+                            }
+                            else
+                            {
+                                <td class="col-xs-10" )>
+                                    @Ajax.ActionLink(@item.Title, "Details", "Messages", new { id = @item.Id }, new AjaxOptions { UpdateTargetId = "moj_div", InsertionMode = InsertionMode.Replace, HttpMethod = "GET" }, new { @class = "" })
+                                </td>
+                                <td class="col-xs-10" )></td>
+                            }
+                            <td class="col-xs-2">
+                                @Html.Action("dateMessage", "Messages", new { id = item.Id })
+                            </td>
+                        </tr>
+                    }
+                </table>
+            </div>
+
+        </div>
+
+    </div>
+</div>

@@ -1,0 +1,74 @@
+﻿@model WebApplication17.Models.Thread
+
+@{
+    ViewBag.Title = "Edycja wątku";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Edit</h2>
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>Edytuj wątek</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.Id)
+
+        <div class="form-group">
+            <span class="control-label col-md-2">Tytuł: </span>
+
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Title, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <span class="control-label col-md-2">Opis: </span>
+
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Content, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Content, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        @if (User.IsInRole("Admin"))
+        {
+            <div class="form-group">
+                <span class="control-label col-md-2">Czy przypiąć? </span>
+                <div class="col-md-10">
+                    Tak @Html.RadioButtonFor(m => m.IsPinned, true, new { @class = "radio-inline" })
+                    Nie @Html.RadioButtonFor(m => m.IsPinned, false, new { @class = "radio-inline" })
+                    @Html.ValidationMessageFor(model => model.IsPinned, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        }
+        else
+        {
+            @Html.Hidden("IsPinned", false)
+        }
+        @Html.Hidden("subjectId", (object)ViewBag.SubjectId)
+        @Html.Hidden("UserId", (object)ViewBag.UserId)
+        @Html.Hidden("Date", (object)ViewBag.Date)
+
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Save" class="btn btn-success" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Wróć do listy wątków", "ThreadsSubject", "Threads", new { id = ViewBag.SubjectId }, new { @class = "btn btn-primary" })
+
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

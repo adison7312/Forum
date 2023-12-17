@@ -1,0 +1,22 @@
+﻿@model IEnumerable<WebApplication17.Models.Subject>
+<div class="row">
+
+    @foreach (var item in Model)
+    {
+        <div class="col-md-12 subject-content">
+            <table width="100%">
+
+                <tr>
+
+                    <td class="col-md-9">
+                        @Html.ActionLink(item.Title, "ThreadsSubject", "Threads", new { id = item.Id }, null) <br />
+                    </td>
+                    <td class="col-md-3">
+                        @Ajax.ActionLink("Edytuj", "EditSubject", new { id = item.Id }, new AjaxOptions { UpdateTargetId = "moj_div", InsertionMode = InsertionMode.Replace, HttpMethod = "GET" }, new { @class = "btn btn-info btn-sm" })
+                    </td>
+                </tr>
+            </table>
+
+        </div>
+    }
+</div>

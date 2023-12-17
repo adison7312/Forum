@@ -1,0 +1,75 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - Forum</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/jquery")
+    @*@Scripts.Render("~/bundles/bootstrap")*@
+    @RenderSection("scripts", required: false)
+    <script type="text/javascript">
+        function newMs() {
+            $.post("/Messages/Unread", function (ile) {
+                if (ile !== -1) {
+                    if (ile === 0) {
+                        document.getElementById("sumOfNewMessages");
+                    }
+                    else {
+                        document.getElementById("sumOfNewMessages");
+                    }
+
+
+                    document.getElementById("sumOfNewMessages").innerHTML = "(" + ile + ")";
+                }
+            });
+
+            setTimeout("newMs()", 3000);
+        }
+
+        function markAsRead(x) {
+            $(document)
+                .ready(function () {
+                    console.log(x);
+                    $.post("/Messages/IfViewd",
+                        { id: x },
+                        function () {
+
+                        });
+                });
+        }
+    </script>
+</head>
+<body onload="newMs()">
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                @Html.ActionLink("Forum", "Index", "Categories", new { area = "" }, new { @class = "navbar-brand" })
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    @*                    <li>@Html.ActionLink("About", "About", "Home")</li>
+                        <li>@Html.ActionLink("Categories", "Index", "Categories")</li>*@
+                </ul>
+                @Html.Partial("_LoginPartial")
+            </div>
+        </div>
+    </div>
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <br />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - Forum</p>
+        </footer>
+    </div>
+
+
+</body>
+</html>

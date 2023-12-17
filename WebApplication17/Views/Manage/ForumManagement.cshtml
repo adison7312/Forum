@@ -1,0 +1,47 @@
+﻿@model IEnumerable<WebApplication17.Models.Category>
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@if (User.IsInRole("Admin"))
+{
+    <br />
+    <div class="panel-group title-bar-position" id="accordion">
+        @Ajax.ActionLink("Stwórz nową kategorię", "CreateCategory", null, new AjaxOptions { UpdateTargetId = "moj_div", InsertionMode = InsertionMode.Replace, HttpMethod = "GET" }, new { @class = "btn btn-success btn-md" })
+        <br /><br />
+
+        @foreach (var item in Model)
+        {
+            <div class="panel panel-default">
+                <div class="panel-heading title-bar">
+                    <table>
+                        <tr>
+                            <td class="col-xs-9">
+                                <b>@item.Title</b>
+                            </td>
+                            <td class="col-xs-3">
+
+                                @Ajax.ActionLink("Edytuj", "EditCategory", new { id = item.Id }, new AjaxOptions { UpdateTargetId = "moj_div", InsertionMode = InsertionMode.Replace, HttpMethod = "GET" }, new { @class = "btn btn-info btn-md" })
+                                @Ajax.ActionLink("Usuń", "DeleteCategory", new { id = item.Id }, new AjaxOptions { UpdateTargetId = "moj_div", InsertionMode = InsertionMode.Replace, HttpMethod = "GET" }, new { @class = "btn btn-danger btn-md" })
+
+                            </td>
+
+                        </tr>
+                    </table>
+                </div>
+
+                <div class="panel-body" style="padding-bottom: 0px; padding-top: 0px;">
+                    @Html.Action("ManageSubjectsInForum", "Manage", new { id = item.Id })
+                </div>
+
+                <div class="panel-footer">
+                    @Ajax.ActionLink("Dodaj nowy temat", "CreateSubject", new { id = item.Id }, new AjaxOptions { UpdateTargetId = "moj_div", InsertionMode = InsertionMode.Replace, HttpMethod = "GET" }, new { @class = "btn btn-success" })
+                </div>
+
+            </div>
+
+            <br />
+        }
+    </div>
+}

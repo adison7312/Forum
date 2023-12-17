@@ -1,0 +1,30 @@
+﻿@model IEnumerable<WebApplication17.Models.Moderator>
+<h3>Lista zarządzanych tematów przez użytkownika @ViewBag.UserName</h3>
+
+@using (Ajax.BeginForm("ModeratorAdd", "Manage", new { userId = ViewBag.UserId }, new AjaxOptions { HttpMethod = "POST", UpdateTargetId = "moj_div", InsertionMode = InsertionMode.Replace }))
+{
+    @Html.DropDownList("selectedId", (SelectList)ViewBag.SelectList, "Wybierz temat", new { @class = "btn btn-primary dropdown-toggle" })
+    <input type="submit" value="Dodaj rolę do tego tematu" class="btn btn-success" />
+
+}
+
+
+<table class="table table-bordered">
+    <th>Temat</th>
+    <th>Akcja</th>
+
+    @foreach (var moderator in Model)
+    {
+        var x = moderator.UserId;
+        <tr>
+            <td>
+                @moderator.Subject.Title
+            </td>
+            <td>
+                @Ajax.ActionLink("Usuń", "ModeratorRemove", new { userId = ViewBag.UserId, subjectId = moderator.SubjectId }, new AjaxOptions { UpdateTargetId = "moj_div", InsertionMode = InsertionMode.Replace, HttpMethod = "POST" }, new { @class = "btn btn-danger btn-sm" })
+
+
+            </td>
+        </tr>
+    }
+</table>

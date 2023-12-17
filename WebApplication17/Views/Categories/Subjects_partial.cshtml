@@ -1,0 +1,32 @@
+﻿@model IEnumerable<WebApplication17.Models.Subject>
+<div class="row">
+    
+    @foreach (var item in Model)
+    {
+        <div class="col-md-12 subject-content">
+            <table width="100%">
+
+                <tr>
+                    <td>
+                        <span class="glyphicon glyphicon-list-alt"></span>
+                    </td>
+                    <td class="col-md-10">
+                        <div style="padding-bottom: 5px;">
+                            @Html.ActionLink(item.Title, "ThreadsSubject", "Threads", new { id = item.Id }, new { @style = "font-size: 17px;" })
+                        </div>
+                        <div style="font-size: 14px;">
+                            Wątki: @Html.Action("ThreadsCount", "Categories", new { id = item.Id }),
+                            Posty: @Html.Action("PostCount", "Categories", new { id = item.Id })
+                        </div>
+
+                    </td>
+                    <td class="col-md-2">
+                        @Html.Action("NewPost", "Categories", new { id = item.Id })
+
+                    </td>
+                </tr>
+            </table>
+
+        </div>
+    }
+</div>

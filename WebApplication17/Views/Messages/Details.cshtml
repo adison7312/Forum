@@ -1,0 +1,31 @@
+﻿@model WebApplication17.Models.Message
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+@Html.Action("IfViewd", new { id = Model.Id })
+
+<br />
+<div class="row">
+    <div class="col-sm-10">
+        Tytuł: @Html.DisplayFor(model => model.Title)
+    </div>
+    <div class="col-sm-2">
+        @Html.DisplayFor(model => model.Date)
+    </div>
+</div>
+<br />
+<div class="row">
+    <div class="col-sm-12">
+        @Html.DisplayFor(model => model.Text)
+    </div>
+</div>
+
+<br /><br />
+@Ajax.ActionLink("Powrót do listy", "Inbox", "Manage", null, new AjaxOptions { UpdateTargetId = "moj_div", InsertionMode = InsertionMode.Replace, HttpMethod = "GET" }, new { @class = "btn btn-primary btn-md" })
+
+<p>
+
+</p>

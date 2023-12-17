@@ -1,0 +1,166 @@
+﻿@model WebApplication17.Models.ThreadsWithPinnedViewModel
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h3>@ViewBag.Title</h3>
+
+
+@Html.ActionLink("Stwórz nowy wątek", "Create", "Threads", new { id = Url.RequestContext.RouteData.Values["id"] }, new { @class = "btn btn-primary btn-sm" })
+
+
+<div class="panel-group title-bar-position" id="accordion">
+
+    <div class="panel panel-default">
+
+
+        <div class="panel-heading title-bar">
+            <a href="/"><span class="glyphicon glyphicon-home" style="padding-right: 5px;"></span>Strona główna forum</a> > @ViewBag.CategoryTitle > @ViewBag.Title
+
+        </div>
+    </div>
+</div>
+
+
+@if (Model.PinnedThreads.Any())
+{
+    <div class="panel-group title-bar-position" id="accordion">
+
+        <div class="panel panel-default">
+
+            <div class="panel-heading title-bar">
+                <table width="100%">
+                    <tr>
+                        <td class="col-xs-7">
+                            Przypięte wątki
+                        </td>
+                        <td class="col-xs-1">
+                            Odpowiedzi
+
+                        </td>
+                        <td class="col-xs-1">
+                            Wyświetlone
+
+                        </td>
+                        <td class="col-xs-3">
+                            Ostatni post
+                        </td>
+                    </tr>
+
+                </table>
+            </div>
+            <div class="panel-body" style="padding-bottom: 0px; padding-top: 0px;">
+                <div class="row">
+
+                    @foreach (var thread in Model.PinnedThreads)
+                    {
+                        <div class="col-md-12 subject-content">
+                            <table width="100%">
+                                <tr>
+                                    <td class="col-xs-7" style="border-right: 1px">
+                                        <b style="font-size: 19px">@Html.ActionLink(thread.Title, "PostThread", "Posts", new { id = thread.Id }, null)</b><br />
+                                        @if (thread.UserId != null)
+                                        {
+                                            <div style="font-size: 13px">Przez: @thread.User.UserName</div>
+                                            <div style="font-size: 12px">@($"{thread.Date:dd/MM/yyyy, hh:mm}")</div>
+                                        }
+
+                                    </td>
+                                    <td class="col-xs-1">
+                                        @Html.Action("PostCount", "Threads", new { id = thread.Id })
+                                    </td>
+                                    <td class="col-xs-1">
+                                        @Html.Action("ViewCount", "Threads", new { id = thread.Id })
+                                    </td>
+                                    <td class="col-xs-3">
+                                        @Html.Action("LastPost", "Threads", new { id = thread.Id })
+                                        @if (User.IsInRole("Admin") || User.IsInRole("Moderator"))
+                                        {
+                                            @Html.ActionLink("Edytuj", "Edit", "Threads", new { id = thread.Id }, new { @class = "btn btn-warning btn-sm" })
+                                            @Html.ActionLink("Usuń", "Delete", "Threads", new { id = thread.Id }, new { @class = "btn btn-danger btn-sm" })
+                                        }
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    }
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+}
+
+
+<div class="panel-group title-bar-position" id="accordion">
+
+    <div class="panel panel-default">
+
+
+        <div class="panel-heading title-bar">
+            <table width="100%">
+                <tr>
+                    <td class="col-xs-7">
+                        Wątki
+                    </td>
+                    <td class="col-xs-1">
+                        Odpowiedzi
+
+                    </td>
+                    <td class="col-xs-1">
+                        Wyświetlone
+
+                    </td>
+                    <td class="col-xs-3">
+                        Ostatni post
+                    </td>
+
+                </tr>
+
+            </table>
+        </div>
+        <div class="panel-body" style="padding-bottom: 0px; padding-top: 0px;">
+            <div class="row">
+
+                @foreach (var thread in Model.UnpinnedThreads)
+                {
+                    <div class="col-md-12 subject-content">
+                        <table width="100%">
+                            <tr>
+                                <td class="col-xs-7" style="border-right: 1px">
+                                    <b style="font-size: 19px">@Html.ActionLink(thread.Title, "PostThread", "Posts", new { id = thread.Id }, null)</b><br />
+                                    @if (thread.UserId != null)
+                                    {
+                                        <div style="font-size: 13px">Przez: @thread.User.UserName</div>
+                                        <div style="font-size: 12px">@($"{thread.Date:dd/MM/yyyy, hh:mm}")</div>
+                                    }
+
+                                </td>
+                                <td class="col-xs-1">
+                                    @Html.Action("PostCount", "Threads", new { id = thread.Id })
+                                </td>
+                                <td class="col-xs-1">
+                                    @Html.Action("ViewCount", "Threads", new { id = thread.Id })
+                                </td>
+                                <td class="col-xs-3">
+                                    @Html.Action("LastPost", "Threads", new { id = thread.Id })
+                                    @if (User.IsInRole("Admin") || User.IsInRole("Moderator"))
+                                    {
+                                        @Html.ActionLink("Edytuj", "Edit", "Threads", new { id = thread.Id }, new { @class = "btn btn-warning btn-sm" })
+                                        @Html.ActionLink("Usuń", "Delete", "Threads", new { id = thread.Id }, new { @class = "btn btn-danger btn-sm" })
+                                    }
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                }
+
+            </div>
+        </div>
+    </div>
+
+</div>
+<br />
+@Html.ActionLink("Stwórz nowy wątek", "Create", "Threads", new { id = Url.RequestContext.RouteData.Values["id"] }, new { @class = "btn btn-primary btn-sm" })
